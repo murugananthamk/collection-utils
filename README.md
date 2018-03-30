@@ -1,2 +1,2 @@
 # collection-utils
-sample
+Collection utils for java 8

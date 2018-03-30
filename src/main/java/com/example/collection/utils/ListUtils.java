@@ -3,10 +3,7 @@
  */
 package com.example.collection.utils;
 
-import static java.util.stream.Collectors.toSet;
-
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,11 +57,11 @@ public class ListUtils {
 		return ( Map<Boolean, Set<T>> ) CollectionUtils.partition( list, predicate, false );
 	}
 	
-	public static <T> List<T> map( List<T> list, Function<T,T> func ) {
-		return ( List<T> ) CollectionUtils.map( list, func, false );
+	public static <T,R> List<R> map( List<T> list, Function<T,R> func ) {
+		return ( List<R> ) CollectionUtils.map( list, func, false );
 	}
 	
-	public static <T> Set<T> mapDistinct( List<T> list, Function<T,T> func ) {
+	public static <T> Set<T> mapToSet( List<T> list, Function<T,T> func ) {
 		return ( Set<T> ) CollectionUtils.map( list, func, true );
 	}
 	
@@ -76,7 +73,40 @@ public class ListUtils {
 		return ( List<T> ) CollectionUtils.distinct( list, false ) ;
 	}
 	
-	//public static <T,R> List<R> distinctFieldAsList( List<T> list, Function<T,R> func ) {
-		
-	//}
+	public static <T,R> List<R> distinctFieldAsList( List<T> list, Function<T,R> func ) {
+		return (List<R>) CollectionUtils.distinctField( list, func, false );
+	}
+	
+	public static <T,R> Set<R> distinctFieldAsSet( List<T> list, Function<T,R> func ) {
+		return (Set<R>) CollectionUtils.distinctField( list, func, true );
+	}
+	
+	public static <T> Integer summingInt( List<T> list, Function<T, Integer> func ) {
+		return CollectionUtils.summingInt( list, func );
+	}
+	
+	public static <T> Long summingLong( List<T> list, Function<T, Long> func ) {
+		return CollectionUtils.summingLong( list, func );
+	}
+	
+	public static <T> Float summingFloat( List<T> list, Function<T, Float> func ) {
+		return CollectionUtils.summingFloat( list, func );
+	}
+	
+	public static <T> Double summingDouble( List<T> list, Function<T, Double> func ) {
+		return CollectionUtils.summingDouble( list, func );
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T,R > R min( List<T> list, Function<T,R> func ) {
+		T t = list.iterator().next();
+		R r = func.apply(t);
+		System.out.println(r.getClass());
+		return null;
+	}
+	
+	/*@SuppressWarnings("unchecked")
+	public static <T,R> R min( List<T> list, Function<T, Long> func ) {
+		return null;
+	}*/
 }
