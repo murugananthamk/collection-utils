@@ -1,9 +1,25 @@
 package com.example.collection.utils;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 
-	public Item() {
+	private String skuNo;
+	
+	private String categroy;
+	
+	private int price;
 
+	public Item(String skuNo, String categroy, int price) {
+		super();
+		this.skuNo = skuNo;
+		this.categroy = categroy;
+		this.price = price;
 	}
 
 	public String getSkuNo() {
@@ -14,12 +30,6 @@ public class Item {
 		this.skuNo = skuNo;
 	}
 
-	public Item(String skuNo, String categroy) {
-		super();
-		this.skuNo = skuNo;
-		this.categroy = categroy;
-	}
-
 	public String getCategroy() {
 		return categroy;
 	}
@@ -28,7 +38,13 @@ public class Item {
 		this.categroy = categroy;
 	}
 
-	private String skuNo;
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	
-	private String categroy;
+	
 }
